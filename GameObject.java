@@ -22,9 +22,7 @@ abstract class GameObject {
     public abstract void move();
     public abstract void draw(Graphics g);
 
-    /**
-     * Checks for bounding box collision (used for Apple-Basket interaction).
-     */
+    //Checks for bounding box collision (used for Apple-Basket interaction)
     public boolean isColliding(GameObject other) {
         Rectangle thisBounds = new Rectangle(x, y, width, height);
         Rectangle otherBounds = new Rectangle(other.x, other.y, other.width, other.height);
