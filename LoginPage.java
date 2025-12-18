@@ -14,7 +14,8 @@ public class LoginPage extends JPanel {
 
     private JTextField userField = new JTextField(10);
     private JPasswordField passField = new JPasswordField(10);
-    private JLabel status = new JLabel("<html> Enough Apples a Day:<br> will keep the Doctor Away<br>Login or Register</html>");    private JLabel status2 = new JLabel("Welcome!");
+    private JLabel status = new JLabel("<html> Enough Apples a Day:<br> will keep the Doctor Away<br>Login or Register</html>");    
+    private JLabel status2 = new JLabel("Welcome!");
     private CardLayout card = new CardLayout();
     private static String currentUser;
     private Image loginBackground = new ImageIcon("login.jpg").getImage();
@@ -27,7 +28,7 @@ public class LoginPage extends JPanel {
         status.setBackground(new Color(0, 0, 0, 150)); // Semi-transparent black
 
         JPanel login_page = new JPanel();
-        status.setOpaque(true);     
+        status.setOpaque(true);  //needed for it to show
         login_page.setOpaque(false);
         login_page.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -40,7 +41,7 @@ public class LoginPage extends JPanel {
         instruction_page.setLayout(new GridBagLayout());
         GridBagConstraints igbc = new GridBagConstraints();
         igbc.gridx = 0;
-        igbc.insets = new Insets(5, 5, 5, 5);
+        igbc.insets = new Insets(5, 5, 5, 5);  
 
         igbc.gridy = 0;
 
@@ -66,6 +67,7 @@ public class LoginPage extends JPanel {
         igbc.gridy++;
         instruction_page.add(new JLabel("Catch enough apples to keep the doctor away!"), igbc);
 
+        //Adds the pages
         this.add(login_page, "login");
         this.add(instruction_page, "instruction");
 
@@ -93,7 +95,7 @@ public class LoginPage extends JPanel {
             window.dispose();
         });
 
-        logoutBtn.addActionListener(e -> {
+        logoutBtn.addActionListener(e -> { //takes back to original login start page
             card.show(this, "login");
             status.setText("Login or Register");
         });
@@ -133,7 +135,7 @@ public class LoginPage extends JPanel {
         login_page.add(button_panel, gbc);
         gbc.fill = GridBagConstraints.NONE;
 
-        loginBtn.addActionListener(e -> {
+        loginBtn.addActionListener(e -> { //Checks details for username/password
             String user = userField.getText().trim();
             String pass = new String(passField.getPassword());
             if (user.isEmpty() || pass.isEmpty()) {
@@ -154,7 +156,7 @@ public class LoginPage extends JPanel {
             } else if (usernameExists(user)) {
                 status.setText("Username already taken, try a different name.");
             } else {
-                saveUser(user, pass, 0, 999);
+                saveUser(user, pass, 0, 999); //sets this at the start so that the fields are not empty
                 status.setText("User " + user + " registered!");
             }
         });
@@ -164,7 +166,7 @@ public class LoginPage extends JPanel {
         });
     }
 
-    private boolean validateLogin(String username, String password) {
+    private boolean validateLogin(String username, String password) { //Checks everything to validate login as method name states
         try (BufferedReader reader = new BufferedReader(new FileReader("userInfo.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -182,7 +184,7 @@ public class LoginPage extends JPanel {
         return false;
     }
 
-    private boolean usernameExists(String username) {
+    private boolean usernameExists(String username) { //checks if username already exists so that there are no duplicates
         try (BufferedReader reader = new BufferedReader(new FileReader("userInfo.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -213,7 +215,7 @@ public class LoginPage extends JPanel {
         g.drawImage(loginBackground, 0, 0, getWidth(), getHeight(), this);
     }
 
-    //Update player's best score for leaderbo
+    //Update player's best score for leaderboard
     public static void updateBestScore(int newScore, int newTime) {
         File input = new File("userInfo.txt");
         File temp = new File("temp.txt");
@@ -238,9 +240,9 @@ public class LoginPage extends JPanel {
 
                     boolean better =
                         newScore > bestScore ||
-                        (newScore == bestScore && newTime < bestTime);
+                        (newScore == bestScore && newTime < bestTime); //compare if new stats are better
 
-                    if (better) {
+                    if (better) { //update stats for leaderboard
                         parts[2] = String.valueOf(newScore);
                         parts[3] = String.valueOf(newTime);
                     }
