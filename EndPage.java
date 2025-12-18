@@ -17,14 +17,14 @@ public class EndPage extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel title = new JLabel("", SwingConstants.CENTER);
-        JLabel message = new JLabel("", SwingConstants.CENTER);
+        JLabel message = new JLabel("", SwingConstants.CENTER); 
 
         JButton leaderboardBtn = new JButton("View Leaderboard");
         leaderboardBtn.addActionListener(e -> showLeaderboard());
         
-        if (won) {
-            JLabel apple = new JLabel(new ImageIcon("apple.png"));
-            apple.setMaximumSize(new Dimension(300, 400));
+        if (won) { //if Won == true
+            JLabel apple = new JLabel(new ImageIcon("apple.png")); // import Image 
+            apple.setMaximumSize(new Dimension(300, 400)); //set image size
             add(apple);
             
             setBackground(new Color(200, 255, 200)); // light green
@@ -45,6 +45,7 @@ public class EndPage extends JPanel {
         JLabel scoreLabel = new JLabel("Final Score: " + score, SwingConstants.CENTER);
         JLabel timeLabel = new JLabel("Time Used: " + timeUsed + " seconds", SwingConstants.CENTER);
 
+        //Adding all components to be displayed 
         add(title);
         add(message);
         add(scoreLabel);
@@ -57,18 +58,18 @@ public class EndPage extends JPanel {
         area.setEditable(false);
         try (BufferedReader br = new BufferedReader(new FileReader("userInfo.txt"))) {
         String line;
-            while ((line = br.readLine()) != null) {
-                String[] p = line.split(",");
+            while ((line = br.readLine()) != null)  { //read line by line
+                String[] p = line.split(","); //splits words by comma
                 area.append(
-                  p[0] + " | Score: " + p[2] + " | Time: " + p[3] + "s\n"
+                  p[0] + " | Score: " + p[2] + " | Time: " + p[3] + "s\n" //p is indes. i.e p[0] is username
                 );
             }
         } catch (IOException e) {
             area.setText("Error loading leaderboard.");
         }
         frame.add(new JScrollPane(area));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        frame.pack(); //sizes window to fit contents
+        frame.setLocationRelativeTo(null); //centers window
+        frame.setVisible(true); //makes the thing actually appear
     }
 }
