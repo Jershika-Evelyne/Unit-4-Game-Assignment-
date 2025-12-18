@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 class Basket extends GameObject {
     public Basket(int x, int y, int width, int height) {
-        super(x, y, width, height, new Color(139, 69, 19)); // Saddle Brown
+        super(x, y, width, height, new Color(139, 69, 19)); //Brown
     }
 
     // Basket movement is handled by the KeyListener in GamePanel, so move() is empty
