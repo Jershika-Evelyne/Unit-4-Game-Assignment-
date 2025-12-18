@@ -9,9 +9,9 @@ class Apple extends GameObject {
     private int speedY;
 
     public Apple(int gameWidth, Random random) {
-        // Apples are 20x20
+        // Apples are 20x20 (size)
         super(random.nextInt(gameWidth - 20), 0, 20, 20, Color.RED); 
-        // Random falling speed (different speeds as requested)
+        // Random falling speed 
         this.speedY = random.nextInt(5) + 2; 
     }
 
