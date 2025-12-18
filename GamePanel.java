@@ -65,7 +65,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseList
     private void stopGame() {
         isRunning = false;
         timer.stop();
-        startButton.setText("Restart Game (Final Score: " + score + ")");
+        startButton.setText("Restart Game (Final Score: " + score + ")"); //Note: this button was from AI, and due to lack of time and higher priorities --> the restart button wasn't worked on to be made to work
         startButton.setVisible(true);
     }
 
@@ -117,17 +117,17 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseList
                 
             } 
             
-            // Check for Miss
-            else if (apple.y > GAME_HEIGHT) {
+            
+            else if (apple.y > GAME_HEIGHT) { //Note: From AI. not edited upon due to lack of time and higher priorities
                 iterator.remove(); 
-                // Simple Game Over condition on a miss
+                // Simple Game Over condition on a miss 
                 // stopGame(); 
             }
         }
         
         // Spawn New Apples
         if (random.nextInt(APPLE_SPAWN_RATE) == 0) {
-            if (random.nextBoolean()) {
+            if (random.nextBoolean()) { //Gives a 50/50 chance
                 apples.add(new Apple(GAME_WIDTH, random));   // red apple
             } else {
                 apples.add(new GApple(GAME_WIDTH, random));  // green apple
@@ -157,7 +157,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseList
         g2d.drawString("Score: " + score, 10, 30);
     }
     
-    // --- KeyListener Implementation ---
+    // KeyListener Implementation 
     @Override
     public void keyPressed(KeyEvent e) {
         if (!isRunning) return; // Ignore input if game is not running
@@ -173,7 +173,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseList
             newX = basket.x + BASKET_SPEED;
         }
         
-        // Apply new position, clamping it to the screen boundaries
+        // Apply new position, stops it to the screen boundaries
         newX = Math.max(0, newX);
         newX = Math.min(GAME_WIDTH - basket.width, newX);
         basket.setX(newX);
@@ -190,11 +190,11 @@ class GamePanel extends JPanel implements ActionListener, KeyListener, MouseList
         LoginPage.updateBestScore(score, timeUsed);
         
         JFrame window = (JFrame) SwingUtilities.getWindowAncestor(this);
-        window.setContentPane(new EndPage(won, score, timeUsed));
+        window.setContentPane(new EndPage(won, score, timeUsed)); //EndPage located under Login Page
         window.revalidate();
     }
 
-    // --- MouseListener Implementation (Interactive Element 2) ---
+    // MouseListener Implementation (Interactive Element 2) 
     @Override
     public void mouseClicked(MouseEvent e) {
         // Change basket color on any mouse click
